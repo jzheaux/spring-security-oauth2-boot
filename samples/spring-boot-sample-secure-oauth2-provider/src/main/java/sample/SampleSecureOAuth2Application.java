@@ -15,9 +15,14 @@
  */
 package sample;
 
+import java.security.Principal;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * After you launch the app, you can retrieve a bearer token like this:
@@ -35,7 +40,14 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
  */
 @EnableAuthorizationServer
 @SpringBootApplication
+@RestController
+@EnableResourceServer
 public class SampleSecureOAuth2Application {
+
+	@GetMapping("/user")
+	public Principal user(Principal user) {
+		return user;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SampleSecureOAuth2Application.class, args);
